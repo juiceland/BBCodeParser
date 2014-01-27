@@ -90,3 +90,10 @@ or
 
     // In this case all tags except [b][/b] will be parsed
     BBCode::except('bold')->parse('[b]bold[/b][i]italic[/i]');
+
+## Custom Parsers
+
+You can add new custom parsers or overwrite existing parsers.
+
+    // name, pattern, replace
+    BBCode::setParser('mailurl', '/\[mailurl\](.*)\[\/mailurl\]/', '<a href="mailto:$1">$1</a>');

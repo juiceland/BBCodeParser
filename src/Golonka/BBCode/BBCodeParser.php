@@ -3,24 +3,76 @@
 class BBCodeParser {
 
     private $availableParsers = array(
-        'bold',
-        'italic',
-        'underLine',
-        'lineThrough',
-        'fontSize',
-        'fontColor',
-        'center',
-        'quote',
-        'namedQuote',
-        'link',
-        'namedLink',
-        'image',
-        'orderedList',
-        'unorderedList',
-        'listItem',
-        'code',
-        'youtube',
+        'bold' => array(
+            'pattern' => '/\[b\](.*)\[\/b\]/', 
+            'replace' => '<strong>$1</strong>'
+        ),
+        'italic' => array(
+            'pattern' => '/\[i\](.*)\[\/i\]/', 
+            'replace' => '<em>$1</em>'
+        ),
+        'underLine' => array(
+            'pattern' => '/\[u\](.*)\[\/u\]/', 
+            'replace' => '<u>$1</u>'
+        ),
+        'lineThrough' => array(
+            'pattern' => '/\[s\](.*)\[\/s\]/', 
+            'replace' => '<strike>$1</strike>'
+        ),
+        'fontSize' => array(
+            'pattern' => '/\[size\=([1-7])\](.*)\[\/size\]/', 
+            'replace' => '<font size="$1">$2</font>'
+        ),
+        'fontColor' => array(
+            'pattern' => '/\[color\=(#[A-f0-9]{6}|#[A-f0-9]{3})\](.*)\[\/color\]/', 
+            'replace' => '<font color="$1">$2</font>'
+        ),
+        'center' => array(
+            'pattern' => '/\[center\](.*)\[\/center\]/', 
+            'replace' => '<div style="text-align:center;">$1</div>'
+        ),
+        'quote' => array(
+            'pattern' => '/\[quote\](.*)\[\/quote\]/', 
+            'replace' => '<blockquote>$1</blockquote>'
+        ),
+        'namedQuote' => array(
+            'pattern' => '/\[quote\=(.*)\](.*)\[\/quote\]/', 
+            'replace' => '<blockquote><small>$1</small>$2</blockquote>'
+        ),
+        'link' => array(
+            'pattern' => '/\[url\](.*)\[\/url\]/', 
+            'replace' => '<a href="$1">$1</a>'
+        ),
+        'namedLink' => array(
+            'pattern' => '/\[url\=(.*)\](.*)\[\/url\]/', 
+            'replace' => '<a href="$1">$2</a>'
+        ),
+        'image' => array(
+            'pattern' => '/\[img\](.*)\[\/img\]/', 
+            'replace' => '<img src="$1">'
+        ),
+        'orderedList' => array(
+            'pattern' => '/\[ol\](.*)\[\/ol\]/s', 
+            'replace' => '<ol>$1</ol>'
+        ),
+        'unorderedList' => array(
+            'pattern' => '/\[ul\](.*)\[\/ul\]/s', 
+            'replace' => '<ul>$1</ul>'
+        ),
+        'listItem' => array(
+            'pattern' => '/\[\*\](.*)/', 
+            'replace' => '<li>$1</li>'
+        ),
+        'code' => array(
+            'pattern' => '/\[code\](.*)\[\/code\]/', 
+            'replace' => '<code>$1</code>'
+        ),
+        'youtube' => array(
+            'pattern' => '/\[youtube\](.*)\[\/youtube\]/', 
+            'replace' => '<iframe width="560" height="315" src="//www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>'
+        )
     );
+
 
     private $parsers;
 
@@ -28,7 +80,7 @@ class BBCodeParser {
     {
         $this->parsers = ($parsers === null) ? $this->availableParsers : $parsers;
     }
-
+    
     /**
      * Parses the BBCode string
      * @param  string $source String containing the BBCode
@@ -36,215 +88,25 @@ class BBCodeParser {
      */
     public function parse($source)
     {
-        foreach ($this->parsers as $parser) {
-            $parser = 'parse'.ucfirst($parser);
-            $source = call_user_func(array($this, $parser), $source);
+        foreach ($this->parsers as $name => $parser) {
+            $source = preg_replace($parser['pattern'], $parser['replace'], $source);
         }
         return $source;
     }
 
     /**
-     * Parse bold tags
-     * @param  string $source String to parse
-     * @return string Parsed string
+     * Sets the parser pattern and replace.
+     * This can be used for new parsers or overwriting existing ones.
+     * @param string $name Parser name
+     * @param string $pattern Pattern
+     * @param string $replace Replace pattern
      */
-    public function parseBold($source)
+    public function setParser($name, $pattern, $replace)
     {
-        $pattern = '/\[b\](.*)\[\/b\]/';
-        $replace = '<strong>$1</strong>';
-        return preg_replace($pattern, $replace, $source);
-    }
-
-    /**
-     * Parse italic tags
-     * @param  string $source String to parse
-     * @return string Parsed string
-     */
-    public function parseItalic($source)
-    {
-        $pattern = '/\[i\](.*)\[\/i\]/';
-        $replace = '<em>$1</em>';
-        return preg_replace($pattern, $replace, $source);
-    }
-
-    /**
-     * Parse under line tags
-     * @param  string $source String to parse
-     * @return string Parsed string
-     */
-    public function parseUnderLine($source)
-    {
-        $pattern = '/\[u\](.*)\[\/u\]/';
-        $replace = '<u>$1</u>';
-        return preg_replace($pattern, $replace, $source);
-    }
-
-    /**
-     * Parse line through tags
-     * @param  string $source String to parse
-     * @return string Parsed string
-     */
-    public function parseLineThrough($source)
-    {
-        $pattern = '/\[s\](.*)\[\/s\]/';
-        $replace = '<strike>$1</strike>';
-        return preg_replace($pattern, $replace, $source);
-    }
-
-    /**
-     * Parse font size tags
-     * @param  string $source String to parse
-     * @return string Parsed string
-     */
-    public function parseFontSize($source)
-    {
-        $pattern = '/\[size\=([1-7])\](.*)\[\/size\]/';
-        $replace = '<font size="$1">$2</font>';
-        return preg_replace($pattern, $replace, $source);
-    }
-
-    /**
-     * Parse font color tags
-     * @param  string $source String to parse
-     * @return string Parsed string
-     */
-    public function parseFontColor($source)
-    {
-        $pattern = '/\[color\=(#[A-f0-9]{6}|#[A-f0-9]{3})\](.*)\[\/color\]/';
-        $replace = '<font color="$1">$2</font>';
-        return preg_replace($pattern, $replace, $source);
-    }
-
-    /**
-     * Parse center tags
-     * @param  string $source String to parse
-     * @return string Parsed string
-     */
-    public function parseCenter($source)
-    {
-        $pattern = '/\[center\](.*)\[\/center\]/';
-        $replace = '<div style="text-align:center;">$1</div>';
-        return preg_replace($pattern, $replace, $source);
-    }
-
-    /**
-     * Parse quote tags
-     * @param  string $source String to parse
-     * @return string Parsed string
-     */
-    public function parseQuote($source)
-    {
-        $pattern = '/\[quote\](.*)\[\/quote\]/';
-        $replace = '<blockquote>$1</blockquote>';
-        return preg_replace($pattern, $replace, $source);
-    }
-
-    /**
-     * Parse named quote tags
-     * @param  string $source String to parse
-     * @return string Parsed string
-     */
-    public function parseNamedQuote($source)
-    {
-        $pattern = '/\[quote\=(.*)\](.*)\[\/quote\]/';
-        $replace = '<blockquote><small>$1</small>$2</blockquote>';
-        return preg_replace($pattern, $replace, $source);
-    }
-
-    /**
-     * Parse link tags
-     * @param  string $source String to parse
-     * @return string Parsed string
-     */
-    public function parseLink($source)
-    {
-        $pattern = '/\[url\](.*)\[\/url\]/';
-        $replace = '<a href="$1">$1</a>';
-        return preg_replace($pattern, $replace, $source);
-    }
-
-    /**
-     * Parse named link tags
-     * @param  string $source String to parse
-     * @return string Parsed string
-     */
-    public function parseNamedLink($source)
-    {
-        $pattern = '/\[url\=(.*)\](.*)\[\/url\]/';
-        $replace = '<a href="$1">$2</a>';
-        return preg_replace($pattern, $replace, $source);
-    }
-
-    /**
-     * Parse image tags
-     * @param  string $source String to parse
-     * @return string Parsed string
-     */
-    public function parseImage($source)
-    {
-        $pattern = '/\[img\](.*)\[\/img\]/';
-        $replace = '<img src="$1">';
-        return preg_replace($pattern, $replace, $source);
-    }
-
-    /**
-     * Parse ordered list tags
-     * @param  string $source String to parse
-     * @return string Parsed string
-     */
-    public function parseOrderedList($source)
-    {
-        $pattern = '/\[ol\](.*)\[\/ol\]/s';
-        $replace = '<ol>$1</ol>';
-        return preg_replace($pattern, $replace, $source);
-    }
-
-    /**
-     * Parse unordered list tags
-     * @param  string $source String to parse
-     * @return string Parsed string
-     */
-    public function parseUnorderedList($source)
-    {
-        $pattern = '/\[ul\](.*)\[\/ul\]/s';
-        $replace = '<ul>$1</ul>';
-        return preg_replace($pattern, $replace, $source);
-    }
-
-    /**
-     * Parse list item tags
-     * @param  string $source String to parse
-     * @return string Parsed string
-     */
-    public function parseListItem($source)
-    {
-        $pattern = '/\[\*\](.*)/';
-        $replace = '<li>$1</li>';
-        return preg_replace($pattern, $replace, $source);
-    }
-
-    /**
-     * Parse code tags
-     * @param  string $source String to parse
-     * @return string Parsed string
-     */
-    public function parseCode($source)
-    {
-        $pattern = '/\[code\](.*)\[\/code\]/';
-        $replace = '<code>$1</code>';
-        return preg_replace($pattern, $replace, $source);
-    }
-
-    /**
-     * Parse youtube tags
-     * @param  string $source String to parse
-     * @return string Parsed string
-     */
-    public function parseYoutube($source)
-    {
-        $pattern = '/\[youtube\](.*)\[\/youtube\]/';
-        $replace = '<iframe width="560" height="315" src="//www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>';
-        return preg_replace($pattern, $replace, $source);
+        $this->parsers[$name] = array(
+            'pattern' => $pattern,
+            'replace' => $replace
+        );
     }
 
     /**
@@ -255,7 +117,7 @@ class BBCodeParser {
     public function only($only = null)
     {
         $only = (is_array($only)) ? $only : func_get_args();
-        $this->parsers = $this->arrayOnly($this->availableParsers, $only);
+        $this->parsers = $this->arrayOnly($only);
         return $this;
     }
 
@@ -267,7 +129,7 @@ class BBCodeParser {
     public function except($except = null)
     {
         $except = (is_array($except)) ? $except : func_get_args();
-        $this->parsers = $this->arrayExcept($this->availableParsers, $except);
+        $this->parsers = $this->arrayExcept($except);
         return $this;
     }
 
@@ -290,35 +152,33 @@ class BBCodeParser {
     }
 
     /**
-     * Removes all parsers that you don´t want
-     * @param  array $allParsers Available parsers
+     * Filters all parsers that you don´t want
      * @param  array $only chosen parsers
      * @return array parsers
      */
-    private function arrayOnly($allParsers, $only)
+    private function arrayOnly($only)
     {
-        return array_flip(
-                array_intersect_key(
-                    array_flip($allParsers), 
-                    array_flip($only)
-                )
-        );
+        $self = $this;
+        return array_filter($only, function($parser) use ($self)
+        {
+            return isset($self->availableParsers[$parser]);
+        });
     }
 
     /**
      * Removes the parsers that you don´t want
-     * @param  array $allParsers Available parsers
      * @param  array $except parsers to exclude
      * @return array parsers
      */
-    private function arrayExcept($allParsers, $except)
+    private function arrayExcept($excepts)
     {
-        return array_flip(
-                array_diff_key(
-                    array_flip($allParsers),
-                    array_flip($except)
-                )
-        );
+        $parsers = $this->availableParsers;
+        foreach($excepts as $except)
+        {
+            unset($parsers[$except]);
+        }
+
+        return $parsers;
     }
 
 }

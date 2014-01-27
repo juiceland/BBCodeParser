@@ -10,140 +10,33 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
         $this->assertNotEmpty($b);
     }
 
-    public function testBoldCanBeParsed()
+    public function testSingleParsing()
     {
+        $tests = array(
+            array('in' => 'foo[b]bar[/b]baz', 'expected' => 'foo<strong>bar</strong>baz'),
+            array('in' => 'foo[i]bar[/i]baz', 'expected' => 'foo<em>bar</em>baz'),
+            array('in' => 'foo[s]bar[/s]baz', 'expected' => 'foo<strike>bar</strike>baz'),
+            array('in' => 'foo[size=6]bar[/size]baz', 'expected' => 'foo<font size="6">bar</font>baz'),
+            array('in' => 'foo[color=#ff0000]bar[/color]baz', 'expected' => 'foo<font color="#ff0000">bar</font>baz'),
+            array('in' => 'foo[color=#eee]bar[/color]baz', 'expected' => 'foo<font color="#eee">bar</font>baz'),
+            array('in' => '[center]foobar[/center]', 'expected' => '<div style="text-align:center;">foobar</div>'),
+            array('in' => '[quote]foobar[/quote]', 'expected' => '<blockquote>foobar</blockquote>'),
+            array('in' => '[quote=golonka]foobar[/quote]', 'expected' => '<blockquote><small>golonka</small>foobar</blockquote>'),
+            array('in' => '[url]http://www.aftonbladet.se[/url]', 'expected' => '<a href="http://www.aftonbladet.se">http://www.aftonbladet.se</a>'),
+            array('in' => '[url=http://www.example.com]aftonbladet[/url]', 'expected' => '<a href="http://www.example.com">aftonbladet</a>'),
+            array('in' => '[img]http://example.com/images/logo.png[/img]', 'expected' => '<img src="http://example.com/images/logo.png">'),
+            array('in' => '[ol][/ol]', 'expected' => '<ol></ol>'),
+            array('in' => '[ul][/ul]', 'expected' => '<ul></ul>'),
+            array('in' => '[*]Item 1', 'expected' => '<li>Item 1</li>'),
+            array('in' => '[code]<?php echo \'Hello World\'; ?>[/code]', 'expected' => '<code><?php echo \'Hello World\'; ?></code>'),
+            array('in' => '[youtube]Nizq4RnsJJo[/youtube]', 'expected' => '<iframe width="560" height="315" src="//www.youtube.com/embed/Nizq4RnsJJo" frameborder="0" allowfullscreen></iframe>'),
+        );
         $b = new BBCodeParser;
-        $s = 'foo[b]bar[/b]baz';
-        $r = $b->parseBold($s);
-        $this->assertEquals('foo<strong>bar</strong>baz', $r);
-    }
 
-    public function testItalicCanBeParsed()
-    {
-        $b = new BBCodeParser;
-        $s = 'foo[i]bar[/i]baz';
-        $r = $b->parseItalic($s);
-        $this->assertEquals('foo<em>bar</em>baz', $r);
-    }
-
-    public function testLineThroughCanBeParsed()
-    {
-        $b = new BBCodeParser;
-        $s = 'foo[s]bar[/s]baz';
-        $r = $b->parseLineThrough($s);
-        $this->assertEquals('foo<strike>bar</strike>baz', $r);
-    }
-
-    public function testFontSizeCanBeParsed()
-    {
-        $b = new BBCodeParser;
-        $s = 'foo[size=6]bar[/size]baz';
-        $r = $b->parseFontSize($s);
-        $this->assertEquals('foo<font size="6">bar</font>baz', $r);
-    }
-
-    public function testFontColorWithSixCharactersCanBeParsed()
-    {
-        $b = new BBCodeParser;
-        $s = 'foo[color=#ff0000]bar[/color]baz';
-        $r = $b->parseFontColor($s);
-        $this->assertEquals('foo<font color="#ff0000">bar</font>baz', $r);
-    }
-
-    public function testFontColorWithThreeCharactersCanBeParsed()
-    {
-        $b = new BBCodeParser;
-        $s = 'foo[color=#eee]bar[/color]baz';
-        $r = $b->parseFontColor($s);
-        $this->assertEquals('foo<font color="#eee">bar</font>baz', $r);
-    }
-
-    public function testCenterCanBeParsed()
-    {
-        $b = new BBCodeParser;
-        $s = '[center]foobar[/center]';
-        $r = $b->parseCenter($s);
-        $this->assertEquals('<div style="text-align:center;">foobar</div>', $r);
-    }
-
-    public function testQuoteCanBeParsed()
-    {
-        $b = new BBCodeParser;
-        $s = '[quote]foobar[/quote]';
-        $r = $b->parseQuote($s);
-        $this->assertEquals('<blockquote>foobar</blockquote>', $r);
-    }
-
-    public function testNamedQuoteCanBeParsed()
-    {
-        $b = new BBCodeParser;
-        $s = '[quote=golonka]foobar[/quote]';
-        $r = $b->parseNamedQuote($s);
-        $this->assertEquals('<blockquote><small>golonka</small>foobar</blockquote>', $r);
-    }
-
-    public function testLinkCanBeParsed()
-    {
-        $b = new BBCodeParser;
-        $s = '[url]http://www.aftonbladet.se[/url]';
-        $r = $b->parseLink($s);
-        $this->assertEquals('<a href="http://www.aftonbladet.se">http://www.aftonbladet.se</a>', $r);
-    }
-
-    public function testNamedLinkCanBeParsed()
-    {
-        $b = new BBCodeParser;
-        $s = '[url=http://www.example.com]aftonbladet[/url]';
-        $r = $b->parseNamedLink($s);
-        $this->assertEquals('<a href="http://www.example.com">aftonbladet</a>', $r);
-    }
-
-    public function testImageCanBeParsed()
-    {
-        $b = new BBCodeParser;
-        $s = '[img]http://example.com/images/logo.png[/img]';
-        $r = $b->parseImage($s);
-        $this->assertEquals('<img src="http://example.com/images/logo.png">', $r);
-    }
-
-    public function testOrderedListCanBeParsed()
-    {
-        $b = new BBCodeParser;
-        $s = '[ol][/ol]';
-        $r = $b->parseOrderedList($s);
-        $this->assertEquals('<ol></ol>', $r);
-    }
-
-    public function testUnorderedListCanBeParsed()
-    {
-        $b = new BBCodeParser;
-        $s = '[ul][/ul]';
-        $r = $b->parseUnorderedList($s);
-        $this->assertEquals('<ul></ul>', $r);
-    }
-
-    public function testListItemCanBeParsed()
-    {
-        $b = new BBCodeParser;
-        $s = '[*]Item 1';
-        $r = $b->parseListItem($s);
-        $this->assertEquals('<li>Item 1</li>', $r);
-    }
-
-    public function testCodeCanBeParsed()
-    {
-        $b = new BBCodeParser;
-        $s = '[code]<?php echo \'Hello World\'; ?>[/code]';
-        $r = $b->parseCode($s);
-        $this->assertEquals('<code><?php echo \'Hello World\'; ?></code>', $r);
-    }
-
-    public function testYoutubeCanBeParsed()
-    {
-        $b = new BBCodeParser;
-        $s = '[youtube]Nizq4RnsJJo[/youtube]';
-        $r = $b->parseYoutube($s);
-        $this->assertEquals('<iframe width="560" height="315" src="//www.youtube.com/embed/Nizq4RnsJJo" frameborder="0" allowfullscreen></iframe>', $r);
+        foreach ($tests as $test) {
+            $result = $b->parse($test['in']);
+            $this->assertEquals($result, $test['expected']);
+        }
     }
 
     public function testCompleteBBCodeParser()
@@ -194,17 +87,16 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
 
         $onlyParsers = array_values($b->only('image', 'link')->getParsers());
 
-        $this->assertEquals($onlyParsers, array('link', 'image'));
+        $this->assertEquals($onlyParsers, array('image', 'link'));
     }
 
     public function testExceptFunctionality()
     {
         $b = new BBCodeParser;
 
-        $exceptParsers = array_values($b->except('image', 'link', 'bold', 'fontSize')->getParsers());
+        $exceptParsers = array_keys($b->except('image', 'link', 'bold', 'fontSize')->getParsers());
 
         $this->assertEquals(
-            $exceptParsers,
             array(
                 'italic',
                 'underLine',
@@ -219,8 +111,20 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
                 'listItem',
                 'code',
                 'youtube',
-            )
+            ),
+            $exceptParsers
         );
+    }
+
+    public function testCustomParser()
+    {
+        $b = new BBCodeParser;
+
+        $b->setParser('verybold', '/\[verybold\](.*)\[\/verybold\]/', '<strong>VERY $1 BOLD</strong>');
+
+        $result = $b->parse('[verybold]something[/verybold]');
+
+        $this->assertEquals($result, '<strong>VERY something BOLD</strong>');
     }
 
 }
