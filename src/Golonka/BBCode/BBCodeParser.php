@@ -2,7 +2,7 @@
 
 class BBCodeParser {
 
-    private $availableParsers = array(
+    public $availableParsers = array(
         'bold' => array(
             'pattern' => '/\[b\](.*)\[\/b\]/', 
             'replace' => '<strong>$1</strong>'
