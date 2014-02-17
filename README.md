@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/golonka/BBCodeParser.png?branch=master)](https://travis-ci.org/golonka/BBCodeParser)
-[![Coverage Status](https://coveralls.io/repos/golonka/BBCodeParser/badge.png)](https://coveralls.io/r/golonka/BBCodeParser)
 
 # BBCodeParser
 BBCodeParser is a standalone library that parses all(?) the common bbcode tags.
