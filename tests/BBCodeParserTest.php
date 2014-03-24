@@ -25,8 +25,9 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
             array('in' => '[url]http://www.aftonbladet.se[/url]', 'expected' => '<a href="http://www.aftonbladet.se">http://www.aftonbladet.se</a>'),
             array('in' => '[url=http://www.example.com]aftonbladet[/url]', 'expected' => '<a href="http://www.example.com">aftonbladet</a>'),
             array('in' => '[img]http://example.com/images/logo.png[/img]', 'expected' => '<img src="http://example.com/images/logo.png">'),
-            array('in' => '[ol][/ol]', 'expected' => '<ol></ol>'),
-            array('in' => '[ul][/ul]', 'expected' => '<ul></ul>'),
+            array('in' => '[list=1][/list]', 'expected' => '<ol></ol>'),
+            array('in' => '[list=a][/list]', 'expected' => '<ol type="a"></ol>'),
+            array('in' => '[list][/list]', 'expected' => '<ul></ul>'),
             array('in' => '[*]Item 1', 'expected' => '<li>Item 1</li>'),
             array('in' => '[code]<?php echo \'Hello World\'; ?>[/code]', 'expected' => '<code><?php echo \'Hello World\'; ?></code>'),
             array('in' => '[youtube]Nizq4RnsJJo[/youtube]', 'expected' => '<iframe width="560" height="315" src="//www.youtube.com/embed/Nizq4RnsJJo" frameborder="0" allowfullscreen></iframe>'),
@@ -47,18 +48,18 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
             [color=#eee]color[/color][center]centered text[/center][quote]quote[/quote]
             [quote=golonka]quote[/quote][url]http://www.example.com[/url]
             [url=http://www.example.com]example.com[/url][img]http://example.com/logo.png[/img]
-            [ol]
+            [list=1]
                 [*]Item 1
                 [*]Item 2
                 [*]Item 3
-            [/ol]
+            [/list]
             [code]<?php echo \'Hello World\'; ?>[/code]
             [youtube]Nizq4RnsJJo[/youtube]
-            [ul]
+            [list]
                 [*]Item 1
                 [*]Item 2
                 [*]Item 3
-            [/ul]
+            [/list]
         ';
         $r = $b->parse($s);
         $this->assertEquals('
@@ -106,7 +107,8 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
                 'quote',
                 'namedQuote',                   
                 'namedLink',
-                'orderedList',
+                'orderedListNumerical',
+                'orderedListAlpha',
                 'unorderedList',
                 'listItem',
                 'code',
