@@ -113,6 +113,7 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
                 'listItem',
                 'code',
                 'youtube',
+                'linebreak',
             ),
             $exceptParsers
         );

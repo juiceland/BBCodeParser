@@ -74,6 +74,10 @@ class BBCodeParser {
         'youtube' => array(
             'pattern' => '/\[youtube\](.*)\[\/youtube\]/', 
             'replace' => '<iframe width="560" height="315" src="//www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>'
+        ),
+        'linebreak' => array(
+            'pattern' => '/\r/',
+            'replace' => '<br />'
         )
     );
 
