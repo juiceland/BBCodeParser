@@ -51,12 +51,16 @@ class BBCodeParser {
             'pattern' => '/\[img\](.*)\[\/img\]/', 
             'replace' => '<img src="$1">'
         ),
-        'orderedList' => array(
-            'pattern' => '/\[ol\](.*)\[\/ol\]/s', 
+        'orderedListNumerical' => array(
+            'pattern' => '/\[list=1\](.*?)\[\/list\]/s', 
             'replace' => '<ol>$1</ol>'
         ),
+        'orderedListAlpha' => array(
+            'pattern' => '/\[list=a\](.*?)\[\/list\]/s', 
+            'replace' => '<ol type="a">$1</ol>'
+        ),
         'unorderedList' => array(
-            'pattern' => '/\[ul\](.*)\[\/ul\]/s', 
+            'pattern' => '/\[list\](.*?)\[\/list\]/s', 
             'replace' => '<ul>$1</ul>'
         ),
         'listItem' => array(
