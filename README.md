@@ -18,8 +18,9 @@ The available tags are:
 - [url][/url] Link
 - [url=http://example.com]example.com[/url] Named link
 - [img]http://example.com]example.com/logo.png[/img] Image
-- [ol][/ol] Ordered list
-- [ul][/ul] Unordered list
+- [list=1][/list] Ordered list (numerical)
+- [list=a][/list] Ordered list (alphabetically)
+- [list][/list] Unordered list
 - [*] List item
 - [code][/code] Code
 - [youtube][/youtube] Youtube
