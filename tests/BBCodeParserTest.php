@@ -132,4 +132,21 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($result, '<strong>VERY something BOLD</strong>');
     }
 
+    public function testIfTagsGetParsedProperlyIfLineBreaksExists()
+    {
+        $b = new BBCodeParser;
+        $result = $b->parse(
+            't[b]e[/b]s[b]t[/b]
+            [code]Test
+            123[/code]'
+        );
+
+        $this->assertEquals(
+            $result, 
+            't<strong>e</strong>s<strong>t</strong>
+            <code>Test
+            123</code>'
+        );
+    }
+
 }

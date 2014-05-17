@@ -4,51 +4,51 @@ class BBCodeParser {
 
     public $availableParsers = array(
         'bold' => array(
-            'pattern' => '/\[b\](.*?)\[\/b\]/', 
+            'pattern' => '/\[b\](.*?)\[\/b\]/s', 
             'replace' => '<strong>$1</strong>'
         ),
         'italic' => array(
-            'pattern' => '/\[i\](.*?)\[\/i\]/', 
+            'pattern' => '/\[i\](.*?)\[\/i\]/s', 
             'replace' => '<em>$1</em>'
         ),
         'underLine' => array(
-            'pattern' => '/\[u\](.*?)\[\/u\]/', 
+            'pattern' => '/\[u\](.*?)\[\/u\]/s', 
             'replace' => '<u>$1</u>'
         ),
         'lineThrough' => array(
-            'pattern' => '/\[s\](.*?)\[\/s\]/', 
+            'pattern' => '/\[s\](.*?)\[\/s\]/s', 
             'replace' => '<strike>$1</strike>'
         ),
         'fontSize' => array(
-            'pattern' => '/\[size\=([1-7])\](.*?)\[\/size\]/', 
+            'pattern' => '/\[size\=([1-7])\](.*?)\[\/size\]/s', 
             'replace' => '<font size="$1">$2</font>'
         ),
         'fontColor' => array(
-            'pattern' => '/\[color\=(#[A-f0-9]{6}|#[A-f0-9]{3})\](.*?)\[\/color\]/', 
+            'pattern' => '/\[color\=(#[A-f0-9]{6}|#[A-f0-9]{3})\](.*?)\[\/color\]/s', 
             'replace' => '<font color="$1">$2</font>'
         ),
         'center' => array(
-            'pattern' => '/\[center\](.*?)\[\/center\]/', 
+            'pattern' => '/\[center\](.*?)\[\/center\]/s', 
             'replace' => '<div style="text-align:center;">$1</div>'
         ),
         'quote' => array(
-            'pattern' => '/\[quote\](.*?)\[\/quote\]/', 
+            'pattern' => '/\[quote\](.*?)\[\/quote\]/s', 
             'replace' => '<blockquote>$1</blockquote>'
         ),
         'namedQuote' => array(
-            'pattern' => '/\[quote\=(.*?)\](.*?)\[\/quote\]/', 
+            'pattern' => '/\[quote\=(.*?)\](.*?)\[\/quote\]/s', 
             'replace' => '<blockquote><small>$1</small>$2</blockquote>'
         ),
         'link' => array(
-            'pattern' => '/\[url\](.*?)\[\/url\]/', 
+            'pattern' => '/\[url\](.*?)\[\/url\]/s', 
             'replace' => '<a href="$1">$1</a>'
         ),
         'namedLink' => array(
-            'pattern' => '/\[url\=(.*?)\](.*?)\[\/url\]/', 
+            'pattern' => '/\[url\=(.*?)\](.*?)\[\/url\]/s', 
             'replace' => '<a href="$1">$2</a>'
         ),
         'image' => array(
-            'pattern' => '/\[img\](.*?)\[\/img\]/', 
+            'pattern' => '/\[img\](.*?)\[\/img\]/s', 
             'replace' => '<img src="$1">'
         ),
         'orderedListNumerical' => array(
@@ -76,11 +76,11 @@ class BBCodeParser {
             'replace' => '<li>$1</li>'
         ),
         'code' => array(
-            'pattern' => '/\[code\](.*?)\[\/code\]/', 
+            'pattern' => '/\[code\](.*?)\[\/code\]/s', 
             'replace' => '<code>$1</code>'
         ),
         'youtube' => array(
-            'pattern' => '/\[youtube\](.*?)\[\/youtube\]/', 
+            'pattern' => '/\[youtube\](.*?)\[\/youtube\]/s', 
             'replace' => '<iframe width="560" height="315" src="//www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>'
         ),
         'linebreak' => array(
