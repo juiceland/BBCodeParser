@@ -149,4 +149,26 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
         );
     }
 
+    public function testNestedNamedQuotes()
+    {
+        $b = new BBCodeParser;
+        $result = $b->parse('[quote=Xzibit][quote=PimpMyRide]So i put a quote in you quote![/quote]I heard you liked quotes.[/quote]');
+
+        $this->assertEquals(
+            $result,
+            '<blockquote><small>Xzibit</small><blockquote><small>PimpMyRide</small>So i put a quote in you quote!</blockquote>I heard you liked quotes.</blockquote>'
+        );
+    }
+
+    public function testNestedQuotes()
+    {
+        $b = new BBCodeParser;
+        $result = $b->parse('[quote][quote]Inception[/quote]Quoteception[/quote]');
+
+        $this->assertEquals(
+            $result,
+            '<blockquote><blockquote>Inception</blockquote>Quoteception</blockquote>'
+        );
+    }
+
 }
