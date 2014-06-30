@@ -184,11 +184,7 @@ class BBCodeParser {
      */
     private function arrayOnly($only)
     {
-        $self = $this;
-        return array_filter($only, function($parser) use ($self)
-        {
-            return isset($self->availableParsers[$parser]);
-        });
+        return array_intersect_key($this->parsers, array_flip((array) $only));
     }
 
     /**
@@ -198,13 +194,7 @@ class BBCodeParser {
      */
     private function arrayExcept($excepts)
     {
-        $parsers = $this->availableParsers;
-        foreach($excepts as $except)
-        {
-            unset($parsers[$except]);
-        }
-
-        return $parsers;
+        return array_diff_key($this->parsers, array_flip((array) $excepts));
     }
 
 }

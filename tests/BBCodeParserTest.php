@@ -86,18 +86,19 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
     {
         $b = new BBCodeParser;
 
-        $onlyParsers = array_values($b->only('image', 'link')->getParsers());
+        $onlyParsers = $b->only('image', 'link')->getParsers();
 
-        $this->assertEquals($onlyParsers, array('image', 'link'));
+        $this->arrays_are_similar($onlyParsers, array('image', 'link'));
     }
 
     public function testExceptFunctionality()
     {
         $b = new BBCodeParser;
 
-        $exceptParsers = array_keys($b->except('image', 'link', 'bold', 'fontSize')->getParsers());
+        $exceptParsers = $b->except('image', 'link', 'bold', 'fontSize')->getParsers();
 
-        $this->assertEquals(
+        $this->arrays_are_similar(
+            $exceptParsers,
             array(
                 'italic',
                 'underLine',
@@ -116,8 +117,7 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
                 'code',
                 'youtube',
                 'linebreak',
-            ),
-            $exceptParsers
+            )
         );
     }
 
@@ -169,6 +169,22 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
             $result,
             '<blockquote><blockquote>Inception</blockquote>Quoteception</blockquote>'
         );
+    }
+
+    protected function arrays_are_similar($a, $b) {
+        // if the indexes don't match, return immediately
+        if (count(array_diff_assoc($a, $b))) {
+            return false;
+        }
+        // we know that the indexes, but maybe not values, match.
+        // compare the values between the two arrays
+        foreach($a as $k => $v) {
+            if ($v !== $b[$k]) {
+                return false;
+            }
+        }
+        // we have identical indexes, and no unequal values
+        return true;
     }
 
 }
