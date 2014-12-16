@@ -2,7 +2,7 @@
 
 class BBCodeParser {
 
-    public $availableParsers = array(
+    public $parsers = array(
         'bold' => array(
             'pattern' => '/\[b\](.*?)\[\/b\]/s', 
             'replace' => '<strong>$1</strong>',
@@ -11,19 +11,19 @@ class BBCodeParser {
             'pattern' => '/\[i\](.*?)\[\/i\]/s', 
             'replace' => '<em>$1</em>',
         ),
-        'underLine' => array(
+        'underline' => array(
             'pattern' => '/\[u\](.*?)\[\/u\]/s', 
             'replace' => '<u>$1</u>',
         ),
-        'lineThrough' => array(
+        'linethrough' => array(
             'pattern' => '/\[s\](.*?)\[\/s\]/s', 
             'replace' => '<strike>$1</strike>',
         ),
-        'fontSize' => array(
+        'size' => array(
             'pattern' => '/\[size\=([1-7])\](.*?)\[\/size\]/s', 
             'replace' => '<font size="$1">$2</font>',
         ),
-        'fontColor' => array(
+        'color' => array(
             'pattern' => '/\[color\=(#[A-f0-9]{6}|#[A-f0-9]{3})\](.*?)\[\/color\]/s', 
             'replace' => '<font color="$1">$2</font>',
         ),
@@ -36,7 +36,7 @@ class BBCodeParser {
             'replace' => '<blockquote>$1</blockquote>',
             'iterate' => 3,
         ),
-        'namedQuote' => array(
+        'namedquote' => array(
             'pattern' => '/\[quote\=(.*?)\](.*)\[\/quote\]/s', 
             'replace' => '<blockquote><small>$1</small>$2</blockquote>',
             'iterate' => 3,
@@ -45,7 +45,7 @@ class BBCodeParser {
             'pattern' => '/\[url\](.*?)\[\/url\]/s', 
             'replace' => '<a href="$1">$1</a>',
         ),
-        'namedLink' => array(
+        'namedlink' => array(
             'pattern' => '/\[url\=(.*?)\](.*?)\[\/url\]/s', 
             'replace' => '<a href="$1">$2</a>',
         ),
@@ -53,27 +53,27 @@ class BBCodeParser {
             'pattern' => '/\[img\](.*?)\[\/img\]/s', 
             'replace' => '<img src="$1">',
         ),
-        'orderedListNumerical' => array(
+        'orderedlistnumerical' => array(
             'pattern' => '/\[list=1\](.*?)\[\/list\]/s', 
             'replace' => '<ol>$1</ol>',
         ),
-        'orderedListAlpha' => array(
+        'orderedlistalpha' => array(
             'pattern' => '/\[list=a\](.*?)\[\/list\]/s', 
             'replace' => '<ol type="a">$1</ol>',
         ),
-        'orderedListDeprecated' => array(
+        'orderedlistdeprecated' => array(
             'pattern' => '/\[ol\](.*?)\[\/ol\]/s', 
             'replace' => '<ol>$1</ol>',
         ),
-        'unorderedList' => array(
+        'unorderedlist' => array(
             'pattern' => '/\[list\](.*?)\[\/list\]/s', 
             'replace' => '<ul>$1</ul>',
         ),
-        'unorderedListDeprecated' => array(
+        'unorderedlistdeprecated' => array(
             'pattern' => '/\[ul\](.*?)\[\/ul\]/s', 
             'replace' => '<ul>$1</ul>',
         ),
-        'listItem' => array(
+        'listitem' => array(
             'pattern' => '/\[\*\](.*)/', 
             'replace' => '<li>$1</li>',
         ),
@@ -90,14 +90,6 @@ class BBCodeParser {
             'replace' => '<br />',
         )
     );
-
-
-    private $parsers;
-
-    public function __construct(array $parsers = null)
-    {
-        $this->parsers = ($parsers === null) ? $this->availableParsers : $parsers;
-    }
     
     /**
      * Parses the BBCode string
