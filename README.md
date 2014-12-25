@@ -35,7 +35,7 @@ If you don´t now what composer is or how you use it you can find more informati
 You can find the BBCodeParser class via [Packagist](https://packagist.org/packages/golonka/bbcodeparser).
 Require the package in your `` composer.json `` file.
 
-    "golonka/bbcodeparser": "1.1.*"
+    "golonka/bbcodeparser": "1.3"
 
 Then you run install or update to download your new requirement
 
