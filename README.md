@@ -16,7 +16,7 @@ The available tags are:
 - [quote][/quote] Quote
 - [quote=John Doe][/quote] Named quote
 - [url][/url] Link
-- [url=http://example.com]example.com[/url] Named link
+- [url=http://example.com]Link to example.com[/url] Named link
 - [img]http://example.com]example.com/logo.png[/img] Image
 - [list=1][/list] Ordered list (numerical)
 - [list=a][/list] Ordered list (alphabetically)
