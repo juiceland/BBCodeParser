@@ -6,24 +6,26 @@ The easiest way to install is via composer and is equally as easy to integrate i
 
 The available tags are:
 
-- [b][/b] Bold
-- [i][/i] Italic
-- [u][/u] Underline
-- [s][/s] Line through
-- [size=4][/size] Font size
-- [color=#eee][/color] Font color
-- [center][/center] Center
-- [quote][/quote] Quote
-- [quote=John Doe][/quote] Named quote
-- [url][/url] Link
-- [url=http://example.com]Link to example.com[/url] Named link
-- [img]http://example.com/logo.png[/img] Image
-- [list=1][/list] Ordered list (numerical)
-- [list=a][/list] Ordered list (alphabetically)
-- [list][/list] Unordered list
-- [*] List item
-- [code][/code] Code
-- [youtube][/youtube] Youtube
+BBCode markup                                | Result                                                  | GitHub representation (if available)
+-------------------------------------------- | ------------------------------------------------------- | -------------------------------
+[b]Bold[/b]                                  | `<strong>Bold</strong>`                                 | **Bold**
+[i]Italic[/i]                                | `<em>Italic</em>`                                       | *Italic*
+[u]Underline[/u]                             | `<u>Underline</u>`                                      | <u>Underline</u>
+[s]Strike[/s]                                | `<strike>Strike</strike>`                               | ~~Strike~~
+[code]Code[/code]                            | `<code>Code</code>`                                     | `Code`
+[quote]Quote[/quote]                         | `<blockquote>Quote</blockquote>`                        | <blockquote>Quote</blockquote>
+[quote=NN]Named quote[/quote]                | `<blockquote><small>NN</small>Named quote</blockquote>` | NN<blockquote>Named quote</blockquote>
+[url]URL[/url]                               | `<a href="URL">URL</a>`                                 | <http://example.com/>
+[url=URL]Link[/url]                          | `<a href="URL">Link</a>`                                | [Link](http://example.com/)
+[img]URL[/img]                               | `<img src="URL">`                                       |
+[size=4]Size[/size]                          | `<font size="4">Size</font>`                            |
+[color=#eca]Color[/color]                    | `<font color="#eca">Color</font>`                       |
+[center]Centered[/center]                    | `<div style="text-align:center;">Centered</div>`        | <p align="center">Centered</p>
+Unordered list: [list][/list]                | `<ul></ul>`                                             |
+Numerically ordered list: [list=1][/list]    | `<ol></ol>`                                             |
+Alphabetically ordered list: [list=a][/list] | `<ol type="a"></ol>`                                    |
+[*]List item                                 | `<li>List item`                                         |
+[youtube]Youtube-ID[/youtube]                | `<iframe width="560" height="315" src="//www.youtube.com/embed/Youtube-ID" frameborder="0" allowfullscreen></iframe>` |
 
 ## Installation
 
