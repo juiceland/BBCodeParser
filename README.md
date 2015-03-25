@@ -57,7 +57,7 @@ Now you are able to require the vendor/autoload.php file to PSR-0 autoload the l
 
     // Lets parse!
     $bbcode = new BBCodeParser;
-    $bbcode->parse('[b]Bold[/b]'); // <b>Bold</b>
+    $bbcode->parse('[b]Bold[/b]'); // <strong>Bold</strong>
     
 If you´re a fan of Laravel 4 then the integration is made in a blink of an eye. 
 We will go through how that is done below. 
