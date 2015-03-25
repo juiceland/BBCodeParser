@@ -14,10 +14,10 @@ The available tags are:
 - [color=#eee][/color] Font color
 - [center][/center] Center
 - [quote][/quote] Quote
-- [quote=John Doe][/] Named quote
+- [quote=John Doe][/quote] Named quote
 - [url][/url] Link
-- [url=http://example.com]example.com[/url] Named link
-- [img]http://example.com]example.com/logo.png[/img] Image
+- [url=http://example.com]Link to example.com[/url] Named link
+- [img]http://example.com/logo.png[/img] Image
 - [list=1][/list] Ordered list (numerical)
 - [list=a][/list] Ordered list (alphabetically)
 - [list][/list] Unordered list
@@ -57,7 +57,7 @@ Now you are able to require the vendor/autoload.php file to PSR-0 autoload the l
 
     // Lets parse!
     $bbcode = new BBCodeParser;
-    $bbcode->parse('[b]Bold[/b]'); // <b>Bold</b>
+    $bbcode->parse('[b]Bold[/b]'); // <strong>Bold</strong>
     
 If you´re a fan of Laravel 4 then the integration is made in a blink of an eye. 
 We will go through how that is done below. 
