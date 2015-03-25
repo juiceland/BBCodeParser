@@ -14,7 +14,7 @@ The available tags are:
 - [color=#eee][/color] Font color
 - [center][/center] Center
 - [quote][/quote] Quote
-- [quote=John Doe][/] Named quote
+- [quote=John Doe][/quote] Named quote
 - [url][/url] Link
 - [url=http://example.com]example.com[/url] Named link
 - [img]http://example.com]example.com/logo.png[/img] Image
