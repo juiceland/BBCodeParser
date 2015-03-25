@@ -10,7 +10,7 @@ BBCode markup                                | Result                           
 -------------------------------------------- | ------------------------------------------------------- | -------------------------------
 [b]Bold[/b]                                  | `<strong>Bold</strong>`                                 | **Bold**
 [i]Italic[/i]                                | `<em>Italic</em>`                                       | *Italic*
-[u]Underline[/u]                             | `<u>Underline</u>`                                      | <u>Underline</u>
+[u]Underline[/u]                             | `<u>Underline</u>`                                      |
 [s]Strike[/s]                                | `<strike>Strike</strike>`                               | ~~Strike~~
 [code]Code[/code]                            | `<code>Code</code>`                                     | `Code`
 [quote]Quote[/quote]                         | `<blockquote>Quote</blockquote>`                        | <blockquote>Quote</blockquote>
