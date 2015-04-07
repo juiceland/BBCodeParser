@@ -21,11 +21,11 @@ class BBCodeParser {
         ),
         'fontSize' => array(
             'pattern' => '/\[size\=([1-7])\](.*?)\[\/size\]/s', 
-            'replace' => '<font size="$1">$2</font>',
+            'replace' => '<span style="font-size: $1px;">$2</span>',
         ),
         'fontColor' => array(
             'pattern' => '/\[color\=(#[A-f0-9]{6}|#[A-f0-9]{3})\](.*?)\[\/color\]/s', 
-            'replace' => '<font color="$1">$2</font>',
+            'replace' => '<span style="color: $1;">$2</span>',
         ),
         'center' => array(
             'pattern' => '/\[center\](.*?)\[\/center\]/s', 
