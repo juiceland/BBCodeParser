@@ -16,9 +16,9 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
             array('in' => 'foo[b]bar[/b]baz', 'expected' => 'foo<strong>bar</strong>baz'),
             array('in' => 'foo[i]bar[/i]baz', 'expected' => 'foo<em>bar</em>baz'),
             array('in' => 'foo[s]bar[/s]baz', 'expected' => 'foo<strike>bar</strike>baz'),
-            array('in' => 'foo[size=6]bar[/size]baz', 'expected' => 'foo<font size="6">bar</font>baz'),
-            array('in' => 'foo[color=#ff0000]bar[/color]baz', 'expected' => 'foo<font color="#ff0000">bar</font>baz'),
-            array('in' => 'foo[color=#eee]bar[/color]baz', 'expected' => 'foo<font color="#eee">bar</font>baz'),
+            array('in' => 'foo[size=6]bar[/size]baz', 'expected' => 'foo<span style="font-size: 6px;">bar</span>baz'),
+            array('in' => 'foo[color=#ff0000]bar[/color]baz', 'expected' => 'foo<span style="color: #ff0000;">bar</span>baz'),
+            array('in' => 'foo[color=#eee]bar[/color]baz', 'expected' => 'foo<span style="color: #eee;">bar</span>baz'),
             array('in' => '[center]foobar[/center]', 'expected' => '<div style="text-align:center;">foobar</div>'),
             array('in' => '[quote]foobar[/quote]', 'expected' => '<blockquote>foobar</blockquote>'),
             array('in' => '[quote=golonka]foobar[/quote]', 'expected' => '<blockquote><small>golonka</small>foobar</blockquote>'),
@@ -63,8 +63,8 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
         ';
         $r = $b->parse($s);
         $this->assertEquals('
-            <strong>bold</strong><em>italic</em><u>underline</u><strike>line through</strike><font size="6">size</font>
-            <font color="#eee">color</font><div style="text-align:center;">centered text</div><blockquote>quote</blockquote>
+            <strong>bold</strong><em>italic</em><u>underline</u><strike>line through</strike><span style="font-size: 6px;">size</span>
+            <span style="color: #eee;">color</span><div style="text-align:center;">centered text</div><blockquote>quote</blockquote>
             <blockquote><small>golonka</small>quote</blockquote><a href="http://www.example.com">http://www.example.com</a>
             <a href="http://www.example.com">example.com</a><img src="http://example.com/logo.png">
             <ol>
