@@ -18,8 +18,8 @@ BBCode markup                                | Result                           
 [url]URL[/url]                               | `<a href="URL">URL</a>`                                 | <http://example.com/>
 [url=URL]Link[/url]                          | `<a href="URL">Link</a>`                                | [Link](http://example.com/)
 [img]URL[/img]                               | `<img src="URL">`                                       |
-[size=4]Size[/size]                          | `<font size="4">Size</font>`                            |
-[color=#eca]Color[/color]                    | `<font color="#eca">Color</font>`                       |
+[size=20]Size[/size]                         | `<span style="font-size: 20px;">size</span>`            |
+[color=#eca]Color[/color]                    | `<span style="color: #eca;">color</span>`               |
 [center]Centered[/center]                    | `<div style="text-align:center;">Centered</div>`        | <p align="center">Centered</p>
 Unordered list: [list][/list]                | `<ul></ul>`                                             |
 Numerically ordered list: [list=1][/list]    | `<ol></ol>`                                             |
