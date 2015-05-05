@@ -37,7 +37,7 @@ If you don´t now what composer is or how you use it you can find more informati
 You can find the BBCodeParser class via [Packagist](https://packagist.org/packages/golonka/bbcodeparser).
 Require the package in your `` composer.json `` file.
 
-    "golonka/bbcodeparser": "1.3"
+    "golonka/bbcodeparser": "1.4"
 
 Then you run install or update to download your new requirement
 
@@ -60,6 +60,10 @@ Now you are able to require the vendor/autoload.php file to PSR-0 autoload the l
     // Lets parse!
     $bbcode = new BBCodeParser;
     $bbcode->parse('[b]Bold[/b]'); // <strong>Bold</strong>
+
+    // Making the parser case insensitive is as easy as adding a parameter
+    $bbcode = new BBCodeParser;
+    $bbcode->parse('[B]Bold[/B]', true); // <strong>Bold</strong>
     
 If you´re a fan of Laravel 4 then the integration is made in a blink of an eye. 
 We will go through how that is done below. 
