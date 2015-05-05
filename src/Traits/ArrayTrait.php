@@ -1,6 +1,7 @@
 <?php namespace Golonka\BBCode\Traits;
 
-trait ArrayTrait {
+trait ArrayTrait
+{
 
     /**
      * Filters all parsers that you don´t want
@@ -21,5 +22,4 @@ trait ArrayTrait {
     {
         return array_diff_key($this->parsers, array_flip((array) $excepts));
     }
-
 }
