@@ -107,14 +107,16 @@ class BBCodeParser {
     public function parse($source, $caseInsensitive = false)
     {
         foreach ($this->parsers as $name => $parser) {
+            $pattern = ($caseInsensitive) ? $parser['pattern'].'i' : $parser['pattern'];
+
             if(isset($parser['iterate']))
             {
                 for ($i=0; $i <= $parser['iterate']; $i++) {
-                    $source = preg_replace($parser['pattern'].($caseInsensitive ? 'i' : ''), $parser['replace'], $source);
+                    $source = preg_replace($pattern, $parser['replace'], $source);
                 }
             }
             else {
-                $source = preg_replace($parser['pattern'].($caseInsensitive ? 'i' : ''), $parser['replace'], $source);
+                $source = preg_replace($pattern, $parser['replace'], $source);
             }
         }
         return $source;
