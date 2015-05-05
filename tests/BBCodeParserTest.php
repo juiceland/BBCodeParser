@@ -171,6 +171,16 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
         );
     }
 
+    public function testCaseInsensitivity()
+    {
+        $b = new BBCodeParser;
+        $result = $b->parse('[B]Bold text[/B]', true);
+        $this->assertEquals($result, '<strong>Bold text</strong>');
+
+        $result = $b->parse('[B]Bold text[/B]');
+        $this->assertEquals($result, '[B]Bold text[/B]');
+    }
+
     protected function arrays_are_similar($a, $b) {
         // if the indexes don't match, return immediately
         if (count(array_diff_assoc($a, $b))) {
