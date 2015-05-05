@@ -1,6 +1,10 @@
 <?php namespace Golonka\BBCode;
 
+use \Golonka\BBCode\Traits\ArrayTrait;
+
 class BBCodeParser {
+
+    use ArrayTrait;
 
     public $parsers = array(
         'bold' => array(
@@ -167,26 +171,6 @@ class BBCodeParser {
     public function getParsers()
     {
         return $this->parsers;
-    }
-
-    /**
-     * Filters all parsers that you don´t want
-     * @param  array $only chosen parsers
-     * @return array parsers
-     */
-    private function arrayOnly($only)
-    {
-        return array_intersect_key($this->parsers, array_flip((array) $only));
-    }
-
-    /**
-     * Removes the parsers that you don´t want
-     * @param  array $except parsers to exclude
-     * @return array parsers
-     */
-    private function arrayExcept($excepts)
-    {
-        return array_diff_key($this->parsers, array_flip((array) $excepts));
     }
 
 }
