@@ -1,4 +1,9 @@
-[![Build Status](https://travis-ci.org/golonka/BBCodeParser.png?branch=master)](https://travis-ci.org/golonka/BBCodeParser)
+[![Latest Version](https://img.shields.io/github/release/golonka/bbcodeparser.svg?style=flat-square)](https://github.com/golonka/bbcodeparser/releases)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Build Status](https://img.shields.io/travis/golonka/bbcodeparser/master.svg?style=flat-square)](https://travis-ci.org/golonka/bbcodeparser)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/golonka/bbcodeparser.svg?style=flat-square)](https://scrutinizer-ci.com/g/golonka/bbcodeparser/code-structure)
+[![Quality Score](https://img.shields.io/scrutinizer/g/golonka/bbcodeparser.svg?style=flat-square)](https://scrutinizer-ci.com/g/golonka/bbcodeparser)
+[![Total Downloads](https://img.shields.io/packagist/dt/league/bbcodeparser.svg?style=flat-square)](https://packagist.org/packages/league/bbcodeparser)
 
 # BBCodeParser
 BBCodeParser is a standalone library that parses all(?) the common bbcode tags.
@@ -6,24 +11,26 @@ The easiest way to install is via composer and is equally as easy to integrate i
 
 The available tags are:
 
-- [b][/b] Bold
-- [i][/i] Italic
-- [u][/u] Underline
-- [s][/s] Line through
-- [size=4][/size] Font size
-- [color=#eee][/color] Font color
-- [center][/center] Center
-- [quote][/quote] Quote
-- [quote=John Doe][/] Named quote
-- [url][/url] Link
-- [url=http://example.com]example.com[/url] Named link
-- [img]http://example.com]example.com/logo.png[/img] Image
-- [list=1][/list] Ordered list (numerical)
-- [list=a][/list] Ordered list (alphabetically)
-- [list][/list] Unordered list
-- [*] List item
-- [code][/code] Code
-- [youtube][/youtube] Youtube
+BBCode markup                                | Result                                                  | Representation
+-------------------------------------------- | ------------------------------------------------------- | -------------------------------
+[b]Bold[/b]                                  | `<strong>Bold</strong>`                                 | **Bold**
+[i]Italic[/i]                                | `<em>Italic</em>`                                       | *Italic*
+[u]Underline[/u]                             | `<u>Underline</u>`                                      | <u>Underline</u>
+[s]Strike[/s]                                | `<strike>Strike</strike>`                               | ~~Strike~~
+[code]Code[/code]                            | `<code>Code</code>`                                     | `Code`
+[quote]Quote[/quote]                         | `<blockquote>Quote</blockquote>`                        | <blockquote>Quote</blockquote>
+[quote=NN]Named quote[/quote]                | `<blockquote><small>NN</small>Named quote</blockquote>` | NN<blockquote>Named quote</blockquote>
+[url]URL[/url]                               | `<a href="URL">URL</a>`                                 | <http://example.com/>
+[url=URL]Link[/url]                          | `<a href="URL">Link</a>`                                | [Link](http://example.com/)
+[img]URL[/img]                               | `<img src="URL">`                                       | 
+[size=20]Size[/size]                         | `<span style="font-size: 20px;">size</span>`            | <span style="font-size: 20px;">Size</span>
+[color=#eca]Color[/color]                    | `<span style="color: #eca;">color</span>`               | <span style="color: #eca;">color</span>
+[center]Centered[/center]                    | `<div style="text-align:center;">Centered</div>`        | <div style="text-align:center;">Centered</div>
+Unordered list: [list][/list]                | `<ul></ul>`                                             |
+Numerically ordered list: [list=1][/list]    | `<ol></ol>`                                             |
+Alphabetically ordered list: [list=a][/list] | `<ol type="a"></ol>`                                    |
+[*]List item                                 | `<li>List item`                                         |
+[youtube]Youtube-ID[/youtube]                | `<iframe width="560" height="315" src="//www.youtube.com/embed/Youtube-ID" frameborder="0" allowfullscreen></iframe>` |
 
 ## Installation
 
@@ -35,7 +42,7 @@ If you don´t now what composer is or how you use it you can find more informati
 You can find the BBCodeParser class via [Packagist](https://packagist.org/packages/golonka/bbcodeparser).
 Require the package in your `` composer.json `` file.
 
-    "golonka/bbcodeparser": "1.1.*"
+    "golonka/bbcodeparser": "1.4"
 
 Then you run install or update to download your new requirement
 
@@ -56,7 +63,13 @@ Now you are able to require the vendor/autoload.php file to PSR-0 autoload the l
     use Golonka\BBCode\BBCodeParser;
 
     // Lets parse!
-    $bbcode = BBCodeParser::parse('[b]Bold[/b]');
+    $bbcode = new BBCodeParser;
+    $bbcode->parse('[b]Bold[/b]'); // <strong>Bold</strong>
+
+    // Making the parser case insensitive is as easy as adding a parameter
+    $bbcode = new BBCodeParser;
+    $bbcode->parse('[B]Bold[/B]', true); // <strong>Bold</strong>
+    
 If you´re a fan of Laravel 4 then the integration is made in a blink of an eye. 
 We will go through how that is done below. 
 
