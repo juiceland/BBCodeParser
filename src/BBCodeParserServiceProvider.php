@@ -2,8 +2,15 @@
 
 use Illuminate\Support\ServiceProvider;
 
-class BBCodeParserServiceProvider extends ServiceProvider
+class BBCodeServiceProvider extends ServiceProvider
 {
+
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = true;
 
     /**
      * Register the service provider.
@@ -12,11 +19,9 @@ class BBCodeParserServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app['bbcode'] = $this->app->share(
-            function ($app) {
-                return new BBCodeParser;
-            }
-        );
+        $this->app->bind('bbcode', function ($app) {
+            return new BBCodeParser();
+        });
     }
 
     /**
@@ -26,6 +31,6 @@ class BBCodeParserServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array('bbcode');
+        return ['Golonka\BBCode\BBCodeParser'];
     }
 }
