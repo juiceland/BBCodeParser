@@ -11,7 +11,7 @@ trait ArrayTrait
      */
     private function arrayOnly(array $parsers, $only)
     {
-        return array_intersect_key($this->parsers, array_flip((array) $only));
+        return array_intersect_key($parsers, array_flip((array) $only));
     }
 
     /**
@@ -22,6 +22,6 @@ trait ArrayTrait
      */
     private function arrayExcept(array $parsers, $except)
     {
-        return array_diff_key($this->parsers, array_flip((array) $except));
+        return array_diff_key($parsers, array_flip((array) $except));
     }
 }
