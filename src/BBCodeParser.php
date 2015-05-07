@@ -39,12 +39,10 @@ class BBCodeParser
         'quote' => array(
             'pattern' => '/\[quote\](.*?)\[\/quote\]/s',
             'replace' => '<blockquote>$1</blockquote>',
-            'iterate' => 3,
         ),
         'namedquote' => array(
             'pattern' => '/\[quote\=(.*?)\](.*)\[\/quote\]/s',
             'replace' => '<blockquote><small>$1</small>$2</blockquote>',
-            'iterate' => 3,
         ),
         'link' => array(
             'pattern' => '/\[url\](.*?)\[\/url\]/s',
