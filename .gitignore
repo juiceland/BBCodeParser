@@ -1,5 +1,4 @@
 vendor/
 *.sublime-project
 *.sublime-workspace
-composer.lock
 .DS_Store
