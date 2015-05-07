@@ -19,7 +19,7 @@ class BBCodeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('bbcode', function ($app) {
+        $this->app->bind('bbcode', function () {
             return new BBCodeParser();
         });
     }
