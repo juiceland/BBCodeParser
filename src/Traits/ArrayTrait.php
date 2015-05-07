@@ -5,21 +5,23 @@ trait ArrayTrait
 
     /**
      * Filters all parsers that you don´t want
-     * @param  array $only chosen parsers
+     * @param array $parsers An array of all parsers
+     * @param array $only Chosen parsers
      * @return array parsers
      */
-    private function arrayOnly($only)
+    private function arrayOnly(array $parsers, $only)
     {
         return array_intersect_key($this->parsers, array_flip((array) $only));
     }
 
     /**
      * Removes the parsers that you don´t want
-     * @param  array $except parsers to exclude
+     * @param array $parsers An array of all parsers
+     * @param array $except Parsers to exclude
      * @return array parsers
      */
-    private function arrayExcept($excepts)
+    private function arrayExcept(array $parsers, $except)
     {
-        return array_diff_key($this->parsers, array_flip((array) $excepts));
+        return array_diff_key($this->parsers, array_flip((array) $except));
     }
 }

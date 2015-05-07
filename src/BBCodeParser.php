@@ -133,7 +133,7 @@ class BBCodeParser
     public function only($only = null)
     {
         $only = (is_array($only)) ? $only : func_get_args();
-        $this->parsers = $this->arrayOnly($only);
+        $this->parsers = $this->arrayOnly($this->parsers, $only);
         return $this;
     }
 
@@ -145,17 +145,8 @@ class BBCodeParser
     public function except($except = null)
     {
         $except = (is_array($except)) ? $except : func_get_args();
-        $this->parsers = $this->arrayExcept($except);
+        $this->parsers = $this->arrayExcept($this->parsers, $except);
         return $this;
-    }
-
-    /**
-     * List of all available parsers
-     * @return array array of available parsers
-     */
-    public function getAvailableParsers()
-    {
-        return $this->availableParsers;
     }
 
     /**
