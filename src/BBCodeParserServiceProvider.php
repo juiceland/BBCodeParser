@@ -2,7 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 
-class BBCodeServiceProvider extends ServiceProvider
+class BBCodeParserServiceProvider extends ServiceProvider
 {
 
     /**
@@ -20,7 +20,7 @@ class BBCodeServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('bbcode', function () {
-            return new BBCodeParser();
+            return new BBCodeParser;
         });
     }
 
@@ -31,6 +31,6 @@ class BBCodeServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['Golonka\BBCode\BBCodeParser'];
+        return ['bbcode'];
     }
 }
