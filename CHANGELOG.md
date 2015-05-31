@@ -25,6 +25,7 @@ All Notable changes to `golonka\BBCodeParser` will be documented in this file
 
 ### Removed
 - The ``iterate`` property is removed. Unneeded after improvements in parsing method.
+- Removed deprecated tags ``[ul]`` and ``[ol]``
 
 ## v1.4 - 2015-05-05
 

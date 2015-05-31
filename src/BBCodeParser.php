@@ -64,16 +64,8 @@ class BBCodeParser
             'pattern' => '/\[list=a\](.*?)\[\/list\]/s',
             'replace' => '<ol type="a">$1</ol>',
         ),
-        'orderedlistdeprecated' => array(
-            'pattern' => '/\[ol\](.*?)\[\/ol\]/s',
-            'replace' => '<ol>$1</ol>',
-        ),
         'unorderedlist' => array(
             'pattern' => '/\[list\](.*?)\[\/list\]/s',
-            'replace' => '<ul>$1</ul>',
-        ),
-        'unorderedlistdeprecated' => array(
-            'pattern' => '/\[ul\](.*?)\[\/ul\]/s',
             'replace' => '<ul>$1</ul>',
         ),
         'listitem' => array(
