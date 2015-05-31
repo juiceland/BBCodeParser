@@ -1,113 +1,88 @@
 [![Latest Version](https://img.shields.io/github/release/golonka/bbcodeparser.svg?style=flat-square)](https://github.com/golonka/bbcodeparser/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/golonka/BBCodeParser/develop.svg?style=flat-square)](https://travis-ci.org/golonka/BBCodeParser)
-[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/golonka/bbcodeparser/develop.svg?style=flat-square)](https://scrutinizer-ci.com/g/golonka/bbcodeparser/code-structure)
-[![Quality Score](https://img.shields.io/scrutinizer/g/golonka/bbcodeparser/develop.svg?style=flat-square)](https://scrutinizer-ci.com/g/golonka/bbcodeparser)
+[![Build Status](https://img.shields.io/travis/golonka/BBCodeParser/master.svg?style=flat-square)](https://travis-ci.org/golonka/BBCodeParser)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/golonka/bbcodeparser/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/golonka/bbcodeparser/code-structure)
+[![Quality Score](https://img.shields.io/scrutinizer/g/golonka/bbcodeparser/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/golonka/bbcodeparser)
 [![Total Downloads](https://img.shields.io/packagist/dt/golonka/bbcodeparser.svg?style=flat-square)](https://packagist.org/packages/golonka/bbcodeparser)
 
-# BBCodeParser
-BBCodeParser is a standalone library that parses all(?) the common bbcode tags.
-The easiest way to install is via composer and is equally as easy to integrate into Laravel 4
+This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
+PSRs you support to avoid any confusion with users and contributors.
 
-The available tags are:
+## Install
 
-BBCode markup                                | Result                                                  | Representation
--------------------------------------------- | ------------------------------------------------------- | -------------------------------
-[b]Bold[/b]                                  | `<strong>Bold</strong>`                                 | **Bold**
-[i]Italic[/i]                                | `<em>Italic</em>`                                       | *Italic*
-[u]Underline[/u]                             | `<u>Underline</u>`                                      | <u>Underline</u>
-[s]Strike[/s]                                | `<strike>Strike</strike>`                               | ~~Strike~~
-[code]Code[/code]                            | `<code>Code</code>`                                     | `Code`
-[quote]Quote[/quote]                         | `<blockquote>Quote</blockquote>`                        | <blockquote>Quote</blockquote>
-[quote=NN]Named quote[/quote]                | `<blockquote><small>NN</small>Named quote</blockquote>` | NN<blockquote>Named quote</blockquote>
-[url]URL[/url]                               | `<a href="URL">URL</a>`                                 | <http://example.com/>
-[url=URL]Link[/url]                          | `<a href="URL">Link</a>`                                | [Link](http://example.com/)
-[img]URL[/img]                               | `<img src="URL">`                                       | 
-[size=20]Size[/size]                         | `<span style="font-size: 20px;">size</span>`            | <span style="font-size: 20px;">Size</span>
-[color=#eca]Color[/color]                    | `<span style="color: #eca;">color</span>`               | <span style="color: #eca;">color</span>
-[center]Centered[/center]                    | `<div style="text-align:center;">Centered</div>`        | <div style="text-align:center;">Centered</div>
-Unordered list: [list][/list]                | `<ul></ul>`                                             |
-Numerically ordered list: [list=1][/list]    | `<ol></ol>`                                             |
-Alphabetically ordered list: [list=a][/list] | `<ol type="a"></ol>`                                    |
-[*]List item                                 | `<li>List item`                                         |
-[youtube]Youtube-ID[/youtube]                | `<iframe width="560" height="315" src="//www.youtube.com/embed/Youtube-ID" frameborder="0" allowfullscreen></iframe>` |
+Via Composer
 
-## Installation
+``` bash
+$ composer require golonka/bbcodeparser
+```
 
-The easiest way to install the BBCodeParser library is via composer.
-If you don´t now what composer is or how you use it you can find more information about that at [their website](http://www.getcomposer.org/).
+## Usage
+To parse some text it's as easy as this!
+``` php
+$bbcode = new Golonka\BBCode\BBCodeParser;
 
-### Composer
+echo $bbcode->parse('[b]Bold Text![/b]');
+// <strong>Bold Text!</strong>
+```
+Would like the parser to not use all bbcodes? Just do like this.
+``` php
+$bbcode = new Golonka\BBCode\BBCodeParser;
 
-You can find the BBCodeParser class via [Packagist](https://packagist.org/packages/golonka/bbcodeparser).
-Require the package in your `` composer.json `` file.
+echo $bbcode->only('bold', 'italic')
+            ->parse('[b][u]Bold[/u] [i]Italic[/i]![/b]');
+            // <strong>[u]Bold[/u] <em>Italic</em>!</strong>
 
-    "golonka/bbcodeparser": "1.4"
+echo $bbcode->except('bold')
+            ->parse('[b]Bold[/b] [i]Italic[/i]');
+            // [b]Bold[/b] <em>Italic</em>
+```
 
-Then you run install or update to download your new requirement
+## Laravel integration
+The integration into Laravel is really easy, and the method is the same for both Laravel 4 and Laravel 5.
+Just open your ``app.php`` config file.
 
-    php composer.phar install
+In there you just add this to your providers array
+``` php
+'Golonka\BBCode\BBCodeParserServiceProvider'
+```
 
-or
+And this to your facades array
+``` php
+'BBCode' => 'Golonka\BBCode\Facades\BBCodeParser'
+```
 
-    php composer.phar update
+The syntax is the same as if you would use it in vanilla PHP but with the ``BBCode::`` before the methods.
+Here is some examples.
+``` php
+// Simple parsing
+echo BBCode::parse('[b]Bold Text![/b]');
 
-Now you are able to require the vendor/autoload.php file to PSR-0 autoload the library.
+// Limiting the parsers with the only method
+echo BBCode::only('bold', 'italic')
+        ->parse('[b][u]Bold[/u] [i]Italic[/i]![/b]');
+        // <strong>[u]Bold[/u] <em>Italic</em>!</strong>
 
-### Example
- 
-    // include composer autoload
-    require 'vendor/autoload.php';
-    
-    // import the BBCodeParser Class
-    use Golonka\BBCode\BBCodeParser;
+// Or the except method
+echo BBCode::except('bold')
+        ->parse('[b]Bold[/b] [i]Italic[/i]');
+        // [b]Bold[/b] <em>Italic</em>
+```
 
-    // Lets parse!
-    $bbcode = new BBCodeParser;
-    $bbcode->parse('[b]Bold[/b]'); // <strong>Bold</strong>
+## Testing
 
-    // Making the parser case insensitive is as easy as adding a parameter
-    $bbcode = new BBCodeParser;
-    $bbcode->parse('[B]Bold[/B]', true); // <strong>Bold</strong>
-    
-If you´re a fan of Laravel 4 then the integration is made in a blink of an eye. 
-We will go through how that is done below. 
+``` bash
+$ phpunit
+```
 
-## Laravel 4 integration
+## Contributing
 
-The BBCodeParser Class has optional Laravel 4 support and comes with a Service Provider and Facades for easy integration. After you have done the installation correctly, just follow the instructions.
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
-Open your Laravel config file config/app.php and add the following lines.
+## Credits
 
-In the ``$providers `` array add the service providers for this package.
+- [Joseph Landberg](https://github.com/golonka)
+- [All Contributors](../../contributors)
 
-    'Golonka\BBCode\BBCodeParserServiceProvider'
+## License
 
-Add the facade of this package to the `` $aliases `` array.
-
-    'BBCode' => 'Golonka\BBCode\Facades\BBCodeParser'
-
-Now the BBCodeParser Class will be auto-loaded by Laravel.
-
-### Example
-
-By default all tags will be parsed
-
-    BBCode::parse('[b]bold[/b][i]italic[/i]');
-
-If you would like to use only some tags when you parse you can do that by doing like this 
-
-    // In this case the [i][/i] tag will not be parsed
-    BBCode::only('bold')->parse('[b]bold[/b][i]italic[/i]');
-
-or
-
-    // In this case all tags except [b][/b] will be parsed
-    BBCode::except('bold')->parse('[b]bold[/b][i]italic[/i]');
-
-## Custom Parsers
-
-You can add new custom parsers or overwrite existing parsers.
-
-    // name, pattern, replace
-    BBCode::setParser('mailurl', '/\[mailurl\](.*)\[\/mailurl\]/', '<a href="mailto:$1">$1</a>');
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
