@@ -86,39 +86,41 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
     {
         $b = new BBCodeParser;
 
-        $onlyParsers = $b->only('image', 'link')->getParsers();
+        $b->only('bold', 'underline');
+        $this->arrays_are_similar($b->getParsers(), ['image', 'link']);
 
-        $this->arrays_are_similar($onlyParsers, array('image', 'link'));
+        $result = $b->parse('[b]Bold[/b] [url]http://example.com[/url] [u]Underline[/u]');
+        $this->assertEquals($result, '<strong>Bold</strong> [url]http://example.com[/url] <u>Underline</u>');
     }
 
     public function testExceptFunctionality()
     {
         $b = new BBCodeParser;
 
-        $exceptParsers = $b->except('image', 'link', 'bold', 'fontSize')->getParsers();
-
+        $b->except('link', 'bold');
         $this->arrays_are_similar(
-            $exceptParsers,
-            array(
+            $b->getParsers(),
+            [
                 'italic',
                 'underLine',
-                'lineThrough',
-                'fontColor',
+                'linethrough',
+                'color',
                 'center',
                 'quote',
-                'namedQuote',                   
-                'namedLink',
-                'orderedListNumerical',
-                'orderedListAlpha',
-                'orderedListDeprecated',
-                'unorderedList',
-                'unorderedListDeprecated',
-                'listItem',
+                'quote',                   
+                'namedlink',
+                'orderedlistnumerical',
+                'orderedlistalpha',
+                'unorderedlist',
+                'listitem',
                 'code',
                 'youtube',
                 'linebreak',
-            )
+            ]
         );
+
+        $result = $b->parse('[b]Bold[/b] [url]http://example.com[/url] [u]Underline[/u]');
+        $this->assertEquals($result, '[b]Bold[/b] [url]http://example.com[/url] <u>Underline</u>');
     }
 
     public function testCustomParser()
@@ -168,6 +170,17 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(
             $result,
             '<blockquote><blockquote>Inception</blockquote>Quoteception</blockquote>'
+        );
+    }
+
+    public function testCaseInsensitivity()
+    {
+        $b = new BBCodeParser;
+        $result = $b->parse('[B][I][U]More tags === More COOL![/U][/I][/B]', true);
+
+        $this->assertEquals(
+            $result,
+            '<strong><em><u>More tags === More COOL!</u></em></strong>'
         );
     }
 
