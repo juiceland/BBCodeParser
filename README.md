@@ -5,8 +5,7 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/golonka/bbcodeparser/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/golonka/bbcodeparser)
 [![Total Downloads](https://img.shields.io/packagist/dt/golonka/bbcodeparser.svg?style=flat-square)](https://packagist.org/packages/golonka/bbcodeparser)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
-PSRs you support to avoid any confusion with users and contributors.
+The ``Golonka\BBCodeParser`` package will help you with parsing BBCode.
 
 ## Install
 
@@ -52,7 +51,7 @@ And this to your facades array
 ```
 
 The syntax is the same as if you would use it in vanilla PHP but with the ``BBCode::`` before the methods.
-Here is some examples.
+Here are some examples.
 ``` php
 // Simple parsing
 echo BBCode::parse('[b]Bold Text![/b]');
