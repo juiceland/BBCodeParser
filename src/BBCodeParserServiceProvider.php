@@ -6,17 +6,22 @@ class BBCodeParserServiceProvider extends ServiceProvider
 {
 
     /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = true;
+
+    /**
      * Register the service provider.
      *
      * @return void
      */
     public function register()
     {
-        $this->app['bbcode'] = $this->app->share(
-            function ($app) {
-                return new BBCodeParser;
-            }
-        );
+        $this->app->bind('bbcode', function () {
+            return new BBCodeParser;
+        });
     }
 
     /**
@@ -26,6 +31,6 @@ class BBCodeParserServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array('bbcode');
+        return ['bbcode'];
     }
 }
