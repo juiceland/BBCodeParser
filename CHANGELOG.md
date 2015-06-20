@@ -2,7 +2,12 @@
 
 All Notable changes to `golonka\BBCodeParser` will be documented in this file
 
-## v2.0.0 - XXXX-XX-XX
+## v2.1.0 - 2015-06-20
+
+### Added
+- Made ``parseCaseSensitive`` and ``parseCaseInsensitive`` functions to make parsing more readable.
+
+## v2.0.0 - 2015-06-02
 
 ### Added
 - Using PSR-4 instead of PSR-0

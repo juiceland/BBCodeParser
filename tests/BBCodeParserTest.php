@@ -173,7 +173,7 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
         );
     }
 
-    public function testCaseInsensitivity()
+    public function testCaseSensitivity()
     {
         $b = new BBCodeParser;
         $result = $b->parse('[B][I][U]More tags === More COOL![/U][/I][/B]', true);
@@ -182,6 +182,17 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
             $result,
             '<strong><em><u>More tags === More COOL!</u></em></strong>'
         );
+    }
+
+    public function testCaseSensitivityHelperFunctions()
+    {
+        $b = new BBCodeParser;
+        $result = $b->parseCaseSensitive('[b]Bold[/b] [I]Italic[/I]');
+        $this->assertEquals($result, '<strong>Bold</strong> [I]Italic[/I]');
+
+        $b = new BBCodeParser;
+        $result = $b->parseCaseInsensitive('[b]Bold[/b] [I]Italic[/I]');
+        $this->assertEquals($result, '<strong>Bold</strong> <em>Italic</em>');
     }
 
     protected function arrays_are_similar($a, $b) {

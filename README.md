@@ -36,6 +36,27 @@ echo $bbcode->except('bold')
             // [b]Bold[/b] <em>Italic</em>
 ```
 
+By default the parser is case sensitive. But if you would like the parser to accept tags like `` [B]Bold Text[/B] `` it's really easy.
+``` php
+$bbcode = new Golonka\BBCode\BBCodeParser;
+
+// Case insensitive
+echo $bbcode->parse('[b]Bold[/b] [I]Italic![/I]', true);
+     // <strong>Bold</strong> <em>Italic!</em>
+
+// Or like this
+
+echo $bbcode->parseCaseInsensitive('[b]Bold[/b] [i]Italic[/i]');
+     // <strong>Bold</strong> <em>Italic!</em>
+```
+You could also make it more explicit that the parser is case sensitive by using another helper function.
+``` php
+    $bbcode = new Golonka\BBCode\BBCodeParser;
+
+    echo $bbcode->parseCaseSensitive('[b]Bold[/b] [I]Italic![/I]');
+         // <strong>Bold</strong> [I]Italic![/I]
+```
+
 ## Laravel integration
 The integration into Laravel is really easy, and the method is the same for both Laravel 4 and Laravel 5.
 Just open your ``app.php`` config file.

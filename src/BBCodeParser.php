@@ -104,19 +104,23 @@ class BBCodeParser
     }
 
     /**
-     * Sets the parser pattern and replace.
-     * This can be used for new parsers or overwriting existing ones.
-     * @param string $name Parser name
-     * @param string $pattern Pattern
-     * @param string $replace Replace pattern
-     * @return void
+     * Helper function to parse case sensitive
+     * @param  string $source String containing the BBCode
+     * @return string Parsed text
      */
-    public function setParser($name, $pattern, $replace)
+    public function parseCaseSensitive($source)
     {
-        $this->parsers[$name] = array(
-            'pattern' => $pattern,
-            'replace' => $replace
-        );
+        return $this->parse($source, false);
+    }
+
+    /**
+     * Helper function to parse case insensitive
+     * @param  string $source String containing the BBCode
+     * @return string Parsed text
+     */
+    public function parseCaseInsensitive($source)
+    {
+        return $this->parse($source, true);
     }
 
     /**
@@ -150,5 +154,21 @@ class BBCodeParser
     public function getParsers()
     {
         return $this->parsers;
+    }
+
+    /**
+     * Sets the parser pattern and replace.
+     * This can be used for new parsers or overwriting existing ones.
+     * @param string $name Parser name
+     * @param string $pattern Pattern
+     * @param string $replace Replace pattern
+     * @return void
+     */
+    public function setParser($name, $pattern, $replace)
+    {
+        $this->parsers[$name] = array(
+            'pattern' => $pattern,
+            'replace' => $replace
+        );
     }
 }
