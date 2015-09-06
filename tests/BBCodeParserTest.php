@@ -20,6 +20,8 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
             array('in' => 'foo[color=#ff0000]bar[/color]baz', 'expected' => 'foo<font color="#ff0000">bar</font>baz'),
             array('in' => 'foo[color=#eee]bar[/color]baz', 'expected' => 'foo<font color="#eee">bar</font>baz'),
             array('in' => '[center]foobar[/center]', 'expected' => '<div style="text-align:center;">foobar</div>'),
+            array('in' => '[left]foobar[/left]', 'expected' => '<div style="text-align:left;">foobar</div>'),
+            array('in' => '[right]foobar[/right]', 'expected' => '<div style="text-align:right;">foobar</div>'),
             array('in' => '[quote]foobar[/quote]', 'expected' => '<blockquote>foobar</blockquote>'),
             array('in' => '[quote=golonka]foobar[/quote]', 'expected' => '<blockquote><small>golonka</small>foobar</blockquote>'),
             array('in' => '[url]http://www.aftonbladet.se[/url]', 'expected' => '<a href="http://www.aftonbladet.se">http://www.aftonbladet.se</a>'),
@@ -107,7 +109,7 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
                 'color',
                 'center',
                 'quote',
-                'quote',                   
+                'quote',
                 'namedlink',
                 'orderedlistnumerical',
                 'orderedlistalpha',
@@ -144,7 +146,7 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
         );
 
         $this->assertEquals(
-            $result, 
+            $result,
             't<strong>e</strong>s<strong>t</strong>
             <code>Test
             123</code>'

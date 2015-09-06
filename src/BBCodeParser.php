@@ -36,6 +36,14 @@ class BBCodeParser
             'pattern' => '/\[center\](.*?)\[\/center\]/s',
             'replace' => '<div style="text-align:center;">$1</div>',
         ],
+        'left' => [
+            'pattern' => '/\[left\](.*?)\[\/left\]/s',
+            'replace' => '<div style="text-align:left;">$1</div>',
+        ],
+        'right' => [
+            'pattern' => '/\[right\](.*?)\[\/right\]/s',
+            'replace' => '<div style="text-align:right;">$1</div>',
+        ],
         'quote' => [
             'pattern' => '/\[quote\](.*?)\[\/quote\]/s',
             'replace' => '<blockquote>$1</blockquote>',
@@ -85,7 +93,7 @@ class BBCodeParser
             'replace' => '<br />',
         ]
     ];
-    
+
     /**
      * Parses the BBCode string
      * @param  string $source String containing the BBCode
