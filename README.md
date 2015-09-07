@@ -57,6 +57,14 @@ You could also make it more explicit that the parser is case sensitive by using 
          // <strong>Bold</strong> [I]Italic![/I]
 ```
 
+If you would like to completely remove all BBCode it's just one function call away.
+``` php
+    $bbcode = new Golonka\BBCode\BBCodeParser;
+
+    echo $bbcode->stripBBCodeTags('[b]Bold[/b] [i]Italic![/i]');
+         // Bold Italic!
+```
+
 ## Laravel integration
 The integration into Laravel is really easy, and the method is the same for both Laravel 4 and Laravel 5.
 Just open your ``app.php`` config file.

@@ -197,6 +197,17 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($result, '<strong>Bold</strong> <em>Italic</em>');
     }
 
+    public function testRemovalOfBBCodeTags()
+    {
+        $b = new BBCodeParser;
+        $result = $b->stripBBCodeTags('[u]Magpie[/u] is one [b]beautiful[/b] bird!');
+        $this->assertEquals($result, 'Magpie is one beautiful bird!');
+
+        $b = new BBCodeParser;
+        $result = $b->stripBBCodeTags('[QUOTE=Magpie]I am one [B]beautiful[/B] bird![/QUOTE]');
+        $this->assertEquals($result, 'I am one beautiful bird!');
+    }
+
     protected function arrays_are_similar($a, $b) {
         // if the indexes don't match, return immediately
         if (count(array_diff_assoc($a, $b))) {
