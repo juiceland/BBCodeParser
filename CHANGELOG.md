@@ -2,6 +2,11 @@
 
 All Notable changes to `golonka\BBCodeParser` will be documented in this file
 
+## v2.2.0 - 2015-06-20
+
+### Added
+- You can now strip all BBCode tags by using the ``stripBBCodeTags`` function.
+
 ## v2.1.0 - 2015-06-20
 
 ### Added
