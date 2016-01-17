@@ -208,6 +208,16 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($result, 'I am one beautiful bird!');
     }
 
+    public function testStatelessParsers()
+    {
+        $b = new BBCodeParser;
+        $result = $b->only('bold')->parse('[b]bold[/b] [i]italic[/i]');
+        $this->assertEquals($result, '<strong>bold</strong> [i]italic[/i]');
+
+        $result = $b->only('italic')->parse('[b]bold[/b] [i]italic[/i]');
+        $this->assertEquals($result, '[b]bold[/b] <em>italic</em>');
+    }
+
     protected function arrays_are_similar($a, $b) {
         // if the indexes don't match, return immediately
         if (count(array_diff_assoc($a, $b))) {
