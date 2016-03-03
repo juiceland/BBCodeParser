@@ -129,7 +129,7 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
     {
         $b = new BBCodeParser;
 
-        $b->setParser('verybold', '/\[verybold\](.*)\[\/verybold\]/', '<strong>VERY $1 BOLD</strong>');
+        $b->setParser('verybold', '/\[verybold\](.*)\[\/verybold\]/', '<strong>VERY $1 BOLD</strong>', '$1');
 
         $result = $b->parse('[verybold]something[/verybold]');
 
