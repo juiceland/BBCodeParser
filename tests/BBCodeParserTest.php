@@ -16,6 +16,7 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
             array('in' => 'foo[b]bar[/b]baz', 'expected' => 'foo<strong>bar</strong>baz'),
             array('in' => 'foo[i]bar[/i]baz', 'expected' => 'foo<em>bar</em>baz'),
             array('in' => 'foo[s]bar[/s]baz', 'expected' => 'foo<strike>bar</strike>baz'),
+            array('in' => 'foo[u]bar[/u]baz', 'expected' => 'foo<u>bar</u>baz'),
             array('in' => 'foo[size=6]bar[/size]baz', 'expected' => 'foo<font size="6">bar</font>baz'),
             array('in' => 'foo[color=#ff0000]bar[/color]baz', 'expected' => 'foo<font color="#ff0000">bar</font>baz'),
             array('in' => 'foo[color=#eee]bar[/color]baz', 'expected' => 'foo<font color="#eee">bar</font>baz'),
