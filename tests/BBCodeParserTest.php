@@ -33,6 +33,9 @@ class BBCodeParserTest extends PHPUnit_Framework_TestCase {
             array('in' => '[*]Item 1', 'expected' => '<li>Item 1</li>'),
             array('in' => '[code]<?php echo \'Hello World\'; ?>[/code]', 'expected' => '<code><?php echo \'Hello World\'; ?></code>'),
             array('in' => '[youtube]Nizq4RnsJJo[/youtube]', 'expected' => '<iframe width="560" height="315" src="//www.youtube.com/embed/Nizq4RnsJJo" frameborder="0" allowfullscreen></iframe>'),
+            array('in' => '[sub]Subscript[/sub]', 'expected' => '<sub>Subscript</sub>'),
+            array('in' => '[sup]Superscript[/sup]', 'expected' => '<sup>Superscript</sup>'),
+            array('in' => '[small]Small text[/small]', 'expected' => '<small>Small text</small>'),
         );
         $b = new BBCodeParser;
 
