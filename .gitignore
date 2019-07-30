@@ -3,3 +3,4 @@ vendor/
 *.sublime-project
 *.sublime-workspace
 .DS_Store
+.phpunit.result.cache

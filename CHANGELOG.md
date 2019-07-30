@@ -4,10 +4,10 @@ All Notable changes to `juiceland\BBCodeParser` will be documented in this file.
 
 ## v3.0.0 - 2019-07-30
 
-Identical functionality compared to v2.3 but skipped support for PHP versions lower than v7.1.
+Identical functionality compared to v2.3 but skipped support for PHP versions lower than v7.2.
 
-- Bumped minimum PHP version to v7.1.
-- Bumped phpunit version to ^7.5.
+- Bumped minimum PHP version to v7.2.
+- Bumped phpunit version to ~8.
 
 ## v2.3.0 - 2019-07-30
 
