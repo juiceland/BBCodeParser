@@ -2,14 +2,14 @@
     "name": "golonka/bbcodeparser",
     "description": "Parse your BBCode easy with this library.",
     "keywords": ["bbcode", "parser", "laravel", "psr-1", "psr-2", "psr-4"],
-    "homepage": "http://github.com/golonka/bbcodeparser",
+    "homepage": "http://github.com/juiceland/bbcodeparser",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
             "name": "Joseph Landberg",
             "email": "joseph.landberg@gmail.com",
-            "homepage": "http://github.com/golonka/"
+            "homepage": "http://github.com/juiceland/"
         }
     ],
     "require": {
