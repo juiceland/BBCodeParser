@@ -1,6 +1,20 @@
 # Changelog
 
-All Notable changes to `golonka\BBCodeParser` will be documented in this file
+All Notable changes to `juiceland\BBCodeParser` will be documented in this file.
+
+## v3.0.0 - 2019-07-30
+
+Identical functionality compared to v2.3 but skipped support for PHP versions lower than v7.1.
+
+- Bumped minimum PHP version to v7.1.
+- Bumped phpunit version to ^7.5.
+
+## v2.3.0 - 2019-07-30
+
+This package was deleted from github some time ago because i couldn't find time to maintain it. Brought it back after some emails from different people that still used it. That motivated me to at least try and maintain it again and I will try to update some things over time. Sorry for the inconvenience, won't happen again!
+
+### Added
+- Added BBCode for sup, sub and small tags.
 
 ## v2.2.0 - 2015-09-07
 

@@ -1,8 +1,9 @@
 <?php
 
 use \Golonka\BBCode\BBCodeParser;
+use PHPUnit\Framework\TestCase;
 
-class BBCodeParserTest extends PHPUnit_Framework_TestCase {
+class BBCodeParserTest extends TestCase {
 
     public function testBBCodeParserCanBeCreated()
     {
