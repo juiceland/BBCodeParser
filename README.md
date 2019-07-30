@@ -1,9 +1,7 @@
 [![Latest Version](https://img.shields.io/github/release/juiceland/bbcodeparser.svg?style=flat-square)](https://github.com/juiceland/bbcodeparser/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/juiceland/BBCodeParser/master.svg?style=flat-square)](https://travis-ci.org/juiceland/BBCodeParser)
-[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/juiceland/bbcodeparser/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/juiceland/bbcodeparser/code-structure)
-[![Quality Score](https://img.shields.io/scrutinizer/g/juiceland/bbcodeparser/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/juiceland/bbcodeparser)
-[![Total Downloads](https://img.shields.io/packagist/dt/juiceland/bbcodeparser.svg?style=flat-square)](https://packagist.org/packages/juiceland/bbcodeparser)
+[![Total Downloads](https://img.shields.io/packagist/dt/golonka/bbcodeparser.svg?style=flat-square)](https://packagist.org/packages/golonka/bbcodeparser)
 
 The ``Golonka\BBCodeParser`` package will help you with parsing BBCode.
 
